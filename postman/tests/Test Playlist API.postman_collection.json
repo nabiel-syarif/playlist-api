@@ -1,0 +1,1813 @@
+{
+	"info": {
+		"_postman_id": "f6a5ece1-cfee-4fc1-920f-85fe01c63149",
+		"name": "Test Playlist API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22905233"
+	},
+	"item": [
+		{
+			"name": "Test Auth",
+			"item": [
+				{
+					"name": "Register Account 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {id}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"user_id_1\", id)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{name_user_1}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "{{email_user_1}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Account 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {id}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"user_id_2\", id)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "{{name_user_2}}",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "{{email_user_2}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Account 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {access_token}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"auth_token\", access_token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email_user_1}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Account 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {access_token}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"auth_token\", access_token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email_user_2}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Songs",
+			"item": [
+				{
+					"name": "Login as Account 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {access_token}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"auth_token\", access_token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email_user_1}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pre Request Add Song",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const songs = [",
+									"    {",
+									"        title: \"Kirakira\",",
+									"        performer: \"Mosawo\",",
+									"        duration: 180,",
+									"        genre: \"Pop\"",
+									"    },",
+									"    {",
+									"        title: \"Koiiro\",",
+									"        performer: \"Mosawo\",",
+									"        duration: 281,",
+									"        genre: \"Pop\"",
+									"    },",
+									"    {",
+									"        title: \"Gyutto\",",
+									"        performer: \"Mosawo\",",
+									"        duration: 270,",
+									"        genre: \"Pop\"",
+									"    },",
+									"    {",
+									"        title: \"Aitai\",",
+									"        performer: \"Mosawo\",",
+									"        duration: 251,",
+									"        genre: \"Pop\"",
+									"    },",
+									"    {",
+									"        title: \"Tracing a Dream\",",
+									"        performer: \"Yoasobi\",",
+									"        duration: 242,",
+									"        genre: \"Pop\"",
+									"    },",
+									"    {",
+									"        title: \"Tabun\",",
+									"        performer: \"Yoasobi\",",
+									"        duration: 257,",
+									"        genre: \"Pop\"",
+									"    }",
+									"];",
+									"",
+									"",
+									"pm.collectionVariables.set(\"total_songs\", songs.length)",
+									"const song = songs.shift();",
+									"pm.collectionVariables.set(\"song_title\", song.title)",
+									"pm.collectionVariables.set(\"song_performer\", song.performer)",
+									"pm.collectionVariables.set(\"song_genre\", song.genre)",
+									"pm.collectionVariables.set(\"song_duration\", song.duration)",
+									"",
+									"pm.collectionVariables.set(\"add_songs\", JSON.stringify(songs))",
+									"pm.collectionVariables.set(\"current_add_song\", 1)",
+									"pm.collectionVariables.set(\"song_ids_account_1\", JSON.stringify([]))",
+									"pm.collectionVariables.set(\"song_ids_account_2\", JSON.stringify([]))"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Song",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"",
+									"    const {data: {id}} = pm.response.json()",
+									"",
+									"    const songs = JSON.parse(pm.collectionVariables.get(\"add_songs\"))",
+									"    const currAcc = Number.parseInt(pm.collectionVariables.get(\"current_add_song\"))",
+									"",
+									"    if (currAcc == 1) {",
+									"        const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_1\"))",
+									"        if (!Array.isArray(songIds)) {",
+									"            throw new Error(\"Song ids is not array\")",
+									"        }",
+									"",
+									"        songIds.push(id)",
+									"        pm.collectionVariables.set(\"song_ids_account_1\", JSON.stringify(songIds))",
+									"",
+									"        pm.collectionVariables.set(\"current_add_song\", 2)",
+									"    } else {",
+									"        const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_2\"))",
+									"        if (!Array.isArray(songIds)) {",
+									"            throw new Error(\"Song ids is not array\")",
+									"        }",
+									"",
+									"        songIds.push(id)",
+									"        pm.collectionVariables.set(\"song_ids_account_2\", JSON.stringify(songIds))",
+									"",
+									"        pm.collectionVariables.set(\"current_add_song\", 1)",
+									"    }",
+									"    ",
+									"    if (songs && Array.isArray(songs) && songs.length > 0 && !Number.isNaN(currAcc)) {",
+									"        // prepare for next request",
+									"        const song = songs.shift();",
+									"        pm.collectionVariables.set(\"song_title\", song.title)",
+									"        pm.collectionVariables.set(\"song_performer\", song.performer)",
+									"        pm.collectionVariables.set(\"song_genre\", song.genre)",
+									"        pm.collectionVariables.set(\"song_duration\", song.duration)",
+									"",
+									"        pm.collectionVariables.set(\"add_songs\", JSON.stringify(songs))",
+									"",
+									"        ",
+									"        postman.setNextRequest(\"Add Song\")",
+									"    } else {",
+									"        console.log(\"Stop Add Song\")",
+									"        postman.setNextRequest(\"List All Songs\")",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "{{song_title}}",
+									"type": "text"
+								},
+								{
+									"key": "performer",
+									"value": "{{song_performer}}",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "{{song_genre}}",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "{{song_duration}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/songs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Songs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data} = pm.response.json()",
+									"",
+									"    pm.expect(data).to.be.an(\"array\")",
+									"    const totalSongs = Number.parseInt(pm.collectionVariables.get(\"total_songs\"))",
+									"    pm.expect(totalSongs).not.to.be.NaN",
+									"    pm.expect(data.length).to.be.equals(totalSongs)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/songs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Song 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"",
+									"    const {data} = pm.response.json()",
+									"    pm.collectionVariables.set(\"song_id_2\", data.id)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Test Song",
+									"type": "text"
+								},
+								{
+									"key": "performer",
+									"value": "Test Performer",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "Test Genre",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "120",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/songs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Song by Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const songId = pm.collectionVariables.get(\"song_id_2\")",
+									"pm.request.url += songId"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/songs/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"songs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Song by Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data} = pm.response.json()",
+									"",
+									"    pm.expect(data.title).to.be.equals(\"Test Song Updated\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Test Song Updated",
+									"type": "text"
+								},
+								{
+									"key": "performer",
+									"value": "Test Performer Updated",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "Test Genre Updated",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "190",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/songs/{{song_id_2}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"songs",
+								"{{song_id_2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Song by Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/songs/{{song_id_2}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"songs",
+								"{{song_id_2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Test Playlist",
+			"item": [
+				{
+					"name": "Login as Account 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {access_token}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"auth_token\", access_token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email_user_1}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Playlist for Account 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"",
+									"    const {data: {id}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"playlist_id_1\", id)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Playlist 1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attach Songs to Playlist 1",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_1\"))",
+									"const pointerHelper = Number.parseInt(pm.collectionVariables.get(\"pointer_helper\"))",
+									"",
+									"",
+									"pm.collectionVariables.set(\"playlist_id\", pm.collectionVariables.get(\"playlist_id_1\"))",
+									"pm.collectionVariables.set(\"song_id\", songIds[pointerHelper])",
+									"if (pointerHelper == songIds.length - 1) {",
+									"    // break request loop",
+									"    pm.collectionVariables.set(\"pointer_helper\", 0)",
+									"    postman.setNextRequest(\"List Playlists for Account 1\")",
+									"} else {",
+									"    pm.collectionVariables.set(\"pointer_helper\", pointerHelper + 1)",
+									"    postman.setNextRequest(\"Attach Songs to Playlist 1\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "playlist_id",
+									"value": "{{playlist_id}}",
+									"type": "text"
+								},
+								{
+									"key": "song_id",
+									"value": "{{song_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/attach-songs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"attach-songs"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Playlists for Account 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data} = pm.response.json()",
+									"",
+									"    pm.expect(data).to.be.an(\"array\")",
+									"    pm.expect(data.length).to.be.equals(1)",
+									"",
+									"    const playlistId = Number.parseInt(pm.collectionVariables.get(\"playlist_id_1\"))",
+									"    pm.expect(data[0].id).to.be.equals(playlistId)",
+									"",
+									"    const songs = data[0].songs;",
+									"    const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_1\"))",
+									"",
+									"    pm.expect(songs.length).to.be.equals(songIds.length)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlist 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data} = pm.response.json()",
+									"",
+									"    const playlistId = Number.parseInt(pm.collectionVariables.get(\"playlist_id_1\"))",
+									"    pm.expect(data.id).to.be.equals(playlistId)",
+									"",
+									"    const songs = data.songs;",
+									"    const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_1\"))",
+									"",
+									"    pm.expect(songs.length).to.be.equals(songIds.length)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/{{playlist_id_1}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"{{playlist_id_1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Playlist 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Playlist 1 Updated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/{{playlist_id_1}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"{{playlist_id_1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Playlist 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/{{playlist_id_1}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"{{playlist_id_1}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as Account 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {access_token}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"auth_token\", access_token)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "{{email_user_2}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Playlist for Account 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"",
+									"    const {data: {id}} = pm.response.json()",
+									"    pm.collectionVariables.set(\"playlist_id_2\", id)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Playlist 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attach Songs to Playlist 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_2\"))",
+									"const pointerHelper = Number.parseInt(pm.collectionVariables.get(\"pointer_helper\"))",
+									"",
+									"pm.collectionVariables.set(\"playlist_id\", pm.collectionVariables.get(\"playlist_id_2\"))",
+									"pm.collectionVariables.set(\"song_id\", songIds[pointerHelper])",
+									"if (pointerHelper == songIds.length - 1) {",
+									"    // break request loop",
+									"    pm.collectionVariables.set(\"pointer_helper\", 0)",
+									"    postman.setNextRequest(\"List Playlists for Account 2\")",
+									"} else {",
+									"    pm.collectionVariables.set(\"pointer_helper\", pointerHelper + 1)",
+									"    postman.setNextRequest(\"Attach Songs to Playlist 2\")",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "playlist_id",
+									"value": "{{playlist_id}}",
+									"type": "text"
+								},
+								{
+									"key": "song_id",
+									"value": "{{song_id}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/attach-songs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"attach-songs"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Playlists for Account 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data} = pm.response.json()",
+									"",
+									"    pm.expect(data).to.be.an(\"array\")",
+									"    pm.expect(data.length).to.be.equals(1)",
+									"",
+									"    const playlistId = Number.parseInt(pm.collectionVariables.get(\"playlist_id_2\"))",
+									"    pm.expect(data[0].id).to.be.equals(playlistId)",
+									"    ",
+									"    const songs = data[0].songs;",
+									"    const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_2\"))",
+									"",
+									"    pm.expect(songs.length).to.be.equals(songIds.length)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/playlists",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Playlist 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data} = pm.response.json()",
+									"",
+									"    const playlistId = Number.parseInt(pm.collectionVariables.get(\"playlist_id_2\"))",
+									"    pm.expect(data.id).to.be.equals(playlistId)",
+									"",
+									"    const songs = data.songs;",
+									"    const songIds = JSON.parse(pm.collectionVariables.get(\"song_ids_account_2\"))",
+									"",
+									"    pm.expect(songs.length).to.be.equals(songIds.length)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/{{playlist_id_2}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"{{playlist_id_2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Playlist 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Playlist 2 Updated",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/{{playlist_id_2}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"{{playlist_id_2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Playlist 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{auth_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/playlists/{{playlist_id_2}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"playlists",
+								"{{playlist_id_2}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "email_user_1",
+			"value": "johndoe@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "email_user_2",
+			"value": "alice@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "password",
+			"value": "rahasia",
+			"type": "string"
+		},
+		{
+			"key": "name_user_1",
+			"value": "John Doe",
+			"type": "string"
+		},
+		{
+			"key": "name_user_2",
+			"value": "Alice",
+			"type": "string"
+		},
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "add_songs",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_title",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_performer",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_genre",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_duration",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_ids_account_1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_ids_account_2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "current_add_song",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "add_songs_iteration",
+			"value": ""
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "total_songs",
+			"value": ""
+		},
+		{
+			"key": "playlist_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "song_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id_1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id_2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "playlist_id_1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "playlist_id_2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "pointer_helper",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "song_id_2",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

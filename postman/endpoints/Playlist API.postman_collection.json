@@ -1,0 +1,552 @@
+{
+	"info": {
+		"_postman_id": "15ea4cfd-bf3a-4e48-85cd-99df35278ee3",
+		"name": "Playlist API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22905233"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Nabiel",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "nabiel@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    const {data: {access_token}} = pm.response.json()",
+									"",
+									"    pm.collectionVariables.set(\"token\", access_token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "nabiel@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/v1/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Require Auth",
+			"item": [
+				{
+					"name": "Song",
+					"item": [
+						{
+							"name": "Add Song",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"    pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "Kirakira",
+											"type": "text"
+										},
+										{
+											"key": "performer",
+											"value": "Mosawo",
+											"type": "text"
+										},
+										{
+											"key": "genre",
+											"value": "Pop",
+											"type": "text"
+										},
+										{
+											"key": "duration",
+											"value": "180",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/songs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"songs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Songs",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/v1/songs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"songs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Song by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/v1/songs/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"songs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Song",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Kirakira",
+											"type": "text"
+										},
+										{
+											"key": "performer",
+											"value": "Mosawo",
+											"type": "text"
+										},
+										{
+											"key": "genre",
+											"value": "Pop",
+											"type": "text"
+										},
+										{
+											"key": "duration",
+											"value": "180",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/songs/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"songs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Song",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/v1/songs/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"songs",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Playlist",
+					"item": [
+						{
+							"name": "Add New Playlist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Mood Booster",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/playlists",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List Playlists",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/v1/playlists",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Playlist by Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/v1/playlists/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Song to Playlist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "playlist_id",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "song_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/playlists/attach-songs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists",
+										"attach-songs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Song from Playlist",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "playlist_id",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "song_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/playlists/detach-songs",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists",
+										"detach-songs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Playlist",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "My Moods",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/v1/playlists/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Playlist",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/v1/playlists/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"v1",
+										"playlists",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
